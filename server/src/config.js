@@ -1,4 +1,5 @@
 import dotenv from 'dotenv';
+import { stripTrailingSlash } from './utils/utils.js';
 
 dotenv.config();
 
@@ -28,7 +29,9 @@ export const config = {
   groqApiKey: readRequiredSetting('GROQ_API_KEY'),
   groqModelName: readOptionalSetting('GROQ_MODEL_NAME', 'llama-3.1-8b-instant'),
   groqRequestTimeoutMs: 15000,
-  clientOrigin: readOptionalSetting('CLIENT_ORIGIN', 'http://localhost:5173'),
+  // A slash on the end is the easiest mistake to make when pasting this into a
+  // hosting dashboard, and it silently blocks the whole site, so take it off.
+  clientOrigin: stripTrailingSlash(readOptionalSetting('CLIENT_ORIGIN', 'http://localhost:5173')),
   // How many past messages of a conversation get sent to the AI as memory.
   conversationMemoryLength: 10,
 };

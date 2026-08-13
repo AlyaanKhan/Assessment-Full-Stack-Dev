@@ -21,6 +21,13 @@ export function createHttpError(statusCode, message) {
   return error;
 }
 
+// Takes any slashes off the end of a web address.
+// Use this on a website address from settings, because a browser treats
+// "https://example.com/" and "https://example.com" as different places.
+export function stripTrailingSlash(address) {
+  return String(address).trim().replace(/\/+$/, '');
+}
+
 // Trims spaces and lowercases an email so the same address always matches.
 // Use this before saving or looking up a user by email.
 export function normalizeEmail(email) {
