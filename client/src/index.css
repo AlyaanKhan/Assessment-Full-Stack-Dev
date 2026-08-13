@@ -691,16 +691,23 @@ a {
     display: none;
   }
 
-  /* On a phone the full example sentences are too wide to sit in a row, so
-     they scroll sideways instead of wrapping into a tall block. */
-  .suggestions-row {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    padding-bottom: var(--space-1);
+  /* On a phone an example sentence is wider than the screen, so let the words
+     inside a chip wrap. Hiding them in a sideways scrolling strip would leave
+     most of the examples out of sight, and their whole job is to be seen. */
+  .chip {
+    white-space: normal;
+    text-align: left;
+    /* Comfortably tappable with a thumb, rather than a thin 26 pixel strip. */
+    min-height: 36px;
+    padding: var(--space-2) var(--space-3);
   }
 
-  .chip {
-    white-space: nowrap;
+  .suggestions {
+    align-items: flex-start;
+  }
+
+  .suggestions-label {
+    padding-top: var(--space-2);
   }
 }
 
